@@ -16,8 +16,9 @@ jobs:
       - name: Conectar a Tailscale
         uses: tailscale/github-action@v3
         with:
-          client-id: ${{ secrets.TS_CLIENT_ID }}
-          client-secret: ${{ secrets.TS_CLIENT_SECRET }}
+          oauth-client-id: ${{ secrets.TS_CLIENT_ID }}
+          oauth-client-secret: ${{ secrets.TS_CLIENT_SECRET }}
+          tags: tag:ci
 
       - name: Desplegar archivos por rsync
         uses: easingthemes/ssh-deploy@main
