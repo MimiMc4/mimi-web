@@ -1,3 +1,6 @@
+#title {
+    
+}
 .game-cell {
     display: flex;
     flex-direction: column;
@@ -7,7 +10,7 @@
 }
 .game-icon {
     width: 100%;
-    max-width: 50px;
+    max-width: 64px;
     object-fit: contain;
 }
 .perfect-badge {
@@ -16,12 +19,12 @@
     object-fit: contain;
 }
 .no-perfect {
-    width: 100%;
-    max-width: 80px;
+    height: 25px;
 }
 
 @media (max-width: 800px) {
-    .game-cell {
-        padding: 2px; 
+    .game-cell{
+        padding: none;
+        gap: none;
     }
 }
