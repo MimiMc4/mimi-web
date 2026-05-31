@@ -27,5 +27,5 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           SOURCE: "./" 
-          TARGET: "/home/${{ secrets.SERVER_USER }}/Homelab/mimi-web/src" # Tu ruta en el i3
+          TARGET: "/home/${{ secrets.SERVER_USER }}/Homelab/mimi-web/"
           ARGS: "-rlgoDzvO --delete --exclude=.git*"
