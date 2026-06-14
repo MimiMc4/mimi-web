@@ -38,4 +38,4 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/${{ secrets.SERVER_USER }}/Homelab/mimi-web/back
-            docker-compose up -d --build
+            docker compose up -d --build
