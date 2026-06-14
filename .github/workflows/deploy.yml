@@ -28,7 +28,7 @@ jobs:
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           SOURCE: "./"
           TARGET: "/home/${{ secrets.SERVER_USER }}/Homelab/mimi-web/"
-          ARGS: "-rlgoDzvO --delete --exclude=.git* --exclude=back/data/"
+          ARGS: "-rlgoDzvO --delete --exclude=.git* --exclude=back/data/ --exclude=.env --exclude=back/.env"
 
       - name: Reconstruir y reiniciar Backend
         uses: appleboy/ssh-action@v1.0.3
