@@ -17,7 +17,7 @@
     <link rel="icon" href="logos/logo-no-vect.png">
 
 
-    <script type="text/javascript" src="/js/functions.js"></script>
+    <script type="text/javascript" src="/js/functions.js?v=2"></script>
 
 </head>
 
@@ -119,10 +119,22 @@
                 </p>
             </div>
 
-            <script>
 
-            </script>
             <div id="img-container" style="margin-top: 5vh;">
+	    <div id="status-container">
+                <div class="madoka-div status-box">
+                    <div class="status-title">Currently reading: </div>
+                    <div id="status-reading">Loading...</div>
+                </div>
+                <div class="madoka-div status-box">
+                    <div class="status-title">Random tought: </div>
+                    <div id="status-message">Loading...</div>
+                </div>
+            </div>
+	    <script>
+		document.addEventListener('DOMContentLoaded', getStatus);
+	    </script>
+            <!--
                 <h3 style="text-align: left;">
                     Tell me something!!
                 </h3>
@@ -131,7 +143,7 @@
                     <textarea class="madoka-div" id="textbox" name="message"
                         placeholder="Send me an anonymous message :" required></textarea>
 
-                    <input type="hidden" name="_next" value="https://mimimc4.github.io/msgConfirm">
+                    <input type="hidden" name="_next" value="https://mimi.tehe.moe/msgConfirm">
                     <input type="hidden" name="_subject" value="New anonymous message!">
 
                     <input type="hidden" name="_captcha" value="false">
@@ -146,6 +158,7 @@
                         </button>
                     </div>
                 </form>
+            -->
 
                 <img id="madohomu-img" src="/gif/madohomu_cuddle_white.gif" />
                 <div style="text-align: center; margin-top: 1em; margin-bottom: 1em;">

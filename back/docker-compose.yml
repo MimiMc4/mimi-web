@@ -1,0 +1,13 @@
+services:
+  mimi-back:
+    build: ./src
+    container_name: mimi-back
+    restart: unless-stopped
+    volumes:
+      - ./data:/app/data
+    networks:
+      - red-homelab
+
+networks:
+  red-homelab:
+    external: true
