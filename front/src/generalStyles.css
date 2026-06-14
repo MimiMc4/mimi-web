@@ -107,8 +107,8 @@ a:active {
 #main {
     position: relative;
     padding: 10px;
-    width: auto;
-
+    flex: 7;
+    min-width: 0;
     text-align: center;
 }
 
@@ -116,14 +116,20 @@ a:active {
     text-align: left;
 }
 
-#left-bar {
+mimi-sidebar {
+    display: flex;
+    align-self: stretch;
+    flex: 3;
+    min-width: 0;
+    margin-right: 10px;
+}
 
-    width: auto;
-    min-width: 120px;
+#left-bar {
     position: relative;
     padding: 10px;
-    margin-right: 10px;
-
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
 }
 
 #mobile-bar {
@@ -146,15 +152,19 @@ a:active {
     }
 
     #mobile-bar {
-        display: flex;             
-        flex-wrap: wrap;          
+        display: flex;
+        flex-wrap: wrap;
         justify-content: space-evenly;
         align-items: center;
-        
+        width: 100%;
         margin-bottom: 10px;
         padding: 10px;
-        
-        font-size: 18px;           
+        box-sizing: border-box;
+        font-size: 18px;
+    }
+
+    mimi-sidebar {
+        margin-right: 0;
     }
 
     #border {
@@ -213,4 +223,62 @@ td{
 }
 tr{
     width: auto;
+}
+.sidebar-status-divider {
+    border-top: 1px solid white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.sidebar-status-block {
+    background-color: rgba(10, 25, 55, 0.65);
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.sidebar-status-title {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    color: #7f88ff;
+    text-transform: lowercase;
+    margin-bottom: 4px;
+}
+
+.sidebar-status-value {
+    font-size: 13px;
+    line-height: 1.4;
+    color: white;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+#mobile-status {
+    display: none;
+}
+
+@media (max-width: 800px) {
+    #mobile-status {
+        display: flex;
+        gap: 10px;
+        margin-top: 4vh;
+        margin-bottom: 1vh;
+        font-size: medium;
+    }
+
+    .mobile-status-block {
+        flex: 1;
+        background-color: rgba(10, 25, 55, 0.65);
+        padding: 8px 10px;
+        overflow: hidden;
+        text-align: left
+    }
+
+    .sidebar-status-title {
+        font-size: medium;
+    }
+
+    .sidebar-status-value {
+        font-size: medium;
+    }
 }

@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="about mimi°•" />
     <meta property="og:description" content="learn something about the webmaster."/>
-    <meta property="og:url" content="https://mimimc4.github.io/about" />
-    <meta property="og:image" content="https://mimimc4.github.io/logos/logo-no-vect.png" />
+    <meta property="og:url" content="https://mimi.tehe.moe/about" />
+    <meta property="og:image" content="https://mimi.tehe.moe/logos/logo-no-vect.png" />
     <meta name="theme-color" content="#FFDC7F"> 
 
     <title>about me | meguca_mimi°•</title>
     <link rel="stylesheet" href="generalStyles.css">
     <link rel="icon" href="../logos/logo-no-vect.png">
+
     <script type="text/javascript" src="/js/functions.js"></script>
+    <script type="text/javascript" src="/js/components/sidebar.js"></script>
 
 </head>
 <body>
@@ -37,36 +39,7 @@
         </marquee>
     </div>
     <div id="border">
-        <div id="mobile-bar" class="madoka-div">
-            <a href="home">home</a>
-            <a href="about" class="active">about</a>
-            <a href="projects">projects</a>
-            <a href="reviews">reviews</a>
-            <a href="achievements">achievements</a>
-        </div>
-        <div id="left-bar" class="madoka-div">
-            <div>hell yeah</div>
-            <div>hell yeah</div>
-            <div>hell yeah</div>
-            <div>
-                <a href="home">• home</a>
-            </div>
-            <div>
-                <a class="active" href="about">• about</a>
-            </div>
-            <div>
-                <a href="projects">• projects</a>
-            </div>
-            <div>
-                <a href="reviews">• reviews</a>
-            </div>
-            <div>
-                <a href="achievements">• achievements</a>
-            </div>
-            <div style="cursor: pointer;" id="left-bottom" onclick="nipah()">
-                - nipah~☆ -
-            </div>
-        </div>
+        <mimi-sidebar active="about"></mimi-sidebar>
         <div id="main" class="madoka-div"> 
             <div id="main-text">
                 <p>Hey, this is the webmaster, mimi.</p>
