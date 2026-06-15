@@ -10,15 +10,10 @@ import (
 	"mimi-back/internal/api/status"
 	botPkg "mimi-back/internal/bot"
 
-	"github.com/joho/godotenv"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 func main() {
-	if err := godotenv.Load(); err != nil {
-		log.Println("Warning: Couldn't find .env, using environment variables")
-	}
-
 	conn, err := sql.Open("sqlite3", "/app/data/mimi-back.db")
 	if err != nil {
 		log.Fatal(err)

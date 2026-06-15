@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     environment:
       - GIN_MODE=release
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - ALLOWED_TELEGRAM_ID=${ALLOWED_TELEGRAM_ID}
     volumes:
       - ./data:/app/data
     networks:
