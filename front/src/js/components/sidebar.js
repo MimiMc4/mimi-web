@@ -1,3 +1,5 @@
+import API from '../api.js';
+
 class MimiSidebar extends HTMLElement {
     constructor() {
         super();
@@ -34,11 +36,11 @@ class MimiSidebar extends HTMLElement {
                 <div class="sidebar-status-divider"></div>
                 <div class="sidebar-status-block">
                     <div class="sidebar-status-title">currently reading</div>
-                    <div id="sidebar-reading" class="sidebar-status-value">···</div>
+                    <div class="status-reading sidebar-status-value">···</div>
                 </div>
                 <div class="sidebar-status-block">
                     <div class="sidebar-status-title">random thought</div>
-                    <div id="sidebar-message" class="sidebar-status-value">···</div>
+                    <div class="status-message sidebar-status-value">···</div>
                 </div>
                 <div style="cursor: pointer;" id="left-bottom" onclick="nipah()">
                     - nipah~☆ -
@@ -50,28 +52,17 @@ class MimiSidebar extends HTMLElement {
     }
 
     async _loadStatus() {
+        console.log('loadStatus called');
+        console.log('elements found:', document.querySelectorAll('.status-reading').length);
+
         try {
-            const response = await fetch('/api/status');
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const data = await response.json();
-
-            const readingEl = this.querySelector('#sidebar-reading');
-            const messageEl = this.querySelector('#sidebar-message');
-
-            if (readingEl) readingEl.textContent = data.Reading ?? '---';
-            if (messageEl) messageEl.textContent = data.Message  ?? '---';
-
-            const mainReading = document.getElementById('status-reading');
-            const mainMessage = document.getElementById('status-message');
-            if (mainReading) mainReading.textContent = data.Reading ?? '---';
-            if (mainMessage) mainMessage.textContent = data.Message  ?? '---';
-
+            const data = await API.getStatus();
+            document.querySelectorAll('.status-reading').forEach(el => el.textContent = data.Reading ?? '---');
+            document.querySelectorAll('.status-message').forEach(el => el.textContent = data.Message  ?? '---');
         } catch (err) {
-            console.error('Error loading status:', err);
-            const readingEl = this.querySelector('#sidebar-reading');
-            const messageEl = this.querySelector('#sidebar-message');
-            if (readingEl) readingEl.textContent = '---';
-            if (messageEl) messageEl.textContent = '---';
+            console.error('Error cargando status:', err);
+            document.querySelectorAll('.status-reading').forEach(el => el.textContent = '---');
+            document.querySelectorAll('.status-message').forEach(el => el.textContent = '---');
         }
     }
 }

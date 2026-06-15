@@ -105,35 +105,32 @@ textarea:focus, input:focus {
 }
 
 
-#status-container {
-    display: flex;
-    gap: 15px;
-    margin-top: 4vh;
-    margin-bottom: 1vh;
-    text-align: left;
-}
-
-.status-box {
-    flex: 1;
-    padding: 15px;
-}
-
-.status-title {
-    font-weight: bold;
-    color: #FFDC7F;
-    font-size: 12px;
-    margin-bottom: 6px;
-    letter-spacing: 1px;
-}
-
-#status-reading, #status-message {
-    font-size: 16px;
-    line-height: 1.4;
+#mobile-status {
+    display: none;
 }
 
 @media (max-width: 800px) {
-    #status-container {
-        flex-direction: column;
-        gap: 12px;
+    #mobile-status {
+        display: flex;
+        gap: 10px;
+        margin-top: 4vh;
+        margin-bottom: 1vh;
+        font-size: medium;
+    }
+
+    .mobile-status-block {
+        flex: 1;
+        background-color: rgba(10, 25, 55, 0.65);
+        padding: 8px 10px;
+        overflow: hidden;
+        text-align: left
+    }
+
+    .sidebar-status-title {
+        font-size: medium;
+    }
+
+    .sidebar-status-value {
+        font-size: medium;
     }
 }

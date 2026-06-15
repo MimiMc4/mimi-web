@@ -18,7 +18,9 @@
 
 
     <script type="text/javascript" src="/js/functions.js?v=2"></script>
-    <script type="text/javascript" src="/js/components/sidebar.js"></script>
+
+    <script type="module" src="/js/pages/index.js"></script>
+    <script type="module" src="/js/components/sidebar.js"></script>
 
 </head>
 
@@ -51,25 +53,6 @@
         <mimi-sidebar active="home"></mimi-sidebar>
         <div id="main" class="madoka-div">
             <img id="premio-img" style="cursor: pointer;" src="gif/premio.gif">
-            <script>
-                document.getElementById("premio-img").addEventListener("click", slotWin);
-
-                function slotWin() {
-                    var audio = new Audio('audio/Slot.mp3');
-                    audio.volume = 0.4;
-                    audio.play();
-
-                    document.getElementById("premio-img").removeEventListener("click", slotWin);
-                    document.getElementById("money-bill").style.display = "block";
-                    document.getElementById("money-coin").style.display = "block";
-                    setTimeout(() => {
-                        document.getElementById("money-bill").style.display = "none";
-                        document.getElementById("money-coin").style.display = "none";
-                        document.getElementById("premio-img").addEventListener("click", slotWin);
-
-                    }, 3000)
-                }
-            </script>
             <h2 style="text-align: left;">
                 Become meguca
             </h2>
@@ -94,11 +77,12 @@
             <div id="mobile-status">
                 <div class="mobile-status-block" style="flex: 3;">
                     <div class="sidebar-status-title">currently reading</div>
-                    <div id="status-reading" class="sidebar-status-value">···</div>
+                    <div class="status-reading sidebar-status-value">···</div>
+
                 </div>
                 <div class="mobile-status-block" style="flex: 7;">
                     <div class="sidebar-status-title">random thought</div>
-                    <div id="status-message" class="sidebar-status-value">···</div>
+                    <div class="status-message sidebar-status-value">···</div>
                 </div>
             </div>
 
@@ -133,60 +117,12 @@
                 <div style="text-align: center; margin-top: 1em; margin-bottom: 1em;">
                     <span id="waow" style="cursor: pointer;">- waow -</span>
                 </div>
-                <script>
-                    document.getElementById("waow").addEventListener("click", waowSound);
-
-                    function waowSound() {
-
-                        var audio = new Audio('audio/waow.ogg');
-                        audio.play();
-                    }
-                </script>
             </div>
 
         </div>
         <img id="warning-img" style="cursor: pointer;" src="img/warning.png">
-        <script>
-            document.getElementById("warning-img").addEventListener("click", XPwarn);
-            document.getElementById("warning-img").addEventListener("click", XPclone);
-
-            function XPwarn() {
-
-                var audio = new Audio('audio/XP_error.mp3');
-                audio.volume = 0.4;
-                audio.play();
-            }
-
-            function XPclone(event) {
-                var myImg = document.createElement('img');
-                myImg.setAttribute('src', "/img/warning.png");
-                myImg.setAttribute('style', "cursor: pointer");
-
-                var distance = 100;
-
-                var offsetX = (Math.random() * 2 - 1) * distance;
-                var offsetY = (Math.random() * 2 - 1) * distance;
-
-
-                var top = event.pageY + offsetY;
-                var left = event.pageX + offsetX;
-
-                myImg.style.position = "absolute"
-                myImg.style.top = top + "px";
-                myImg.style.left = left + "px";
-
-                myImg.draggable = false;
-                myImg.style.userSelect = "none";
-
-                myImg.addEventListener("click", XPwarn);
-                myImg.addEventListener("click", XPclone);
-
-                document.body.appendChild(myImg);
-            }
-        </script>
     </div>
     <div id="random-word">hello </div>
 
 </body>
-
 </html>
