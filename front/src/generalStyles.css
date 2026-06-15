@@ -107,7 +107,7 @@ a:active {
 #main {
     position: relative;
     padding: 10px;
-    flex: 7;
+    flex: 75;
     min-width: 0;
     text-align: center;
 }
@@ -119,7 +119,7 @@ a:active {
 mimi-sidebar {
     display: flex;
     align-self: stretch;
-    flex: 3;
+    flex: 25;
     min-width: 0;
     margin-right: 10px;
 }
