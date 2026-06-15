@@ -14,7 +14,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Instalar sqlc
-        run: go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+        uses: sqlc-dev/setup-sqlc@v4
+        with:
+          sqlc-version: '1.27.0'
 
       - name: Build
         working-directory: ./back/src
