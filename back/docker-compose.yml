@@ -3,6 +3,8 @@ services:
     build: ./src
     container_name: mimi-back
     restart: unless-stopped
+    environment:
+      - GIN_MODE=release
     volumes:
       - ./data:/app/data
     networks:

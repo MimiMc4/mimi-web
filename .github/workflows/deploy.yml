@@ -13,6 +13,56 @@ jobs:
       - name: Checkout del código
         uses: actions/checkout@v4
 
+      - name: Instalar sqlc
+        run: go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
+
+      - name: Build
+        working-directory: ./back/src
+        run: |
+          sudo apt-get install -y gcc
+          make build
+
+      - name: Conectar a Tailscale
+        uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_CLIENT_SECRET }}
+          tags: tag:ci
+
+      - name: Desplegar archivos por rsync
+        uses: easingthemes/ssh-deploy@v5.1.0
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USER }}
+          SOURCE: "./"
+          TARGET: "/home/${{ secrets.SERVER_USER }}/Homelab/mimi-web/"
+          ARGS: "-rlgoDzvO --delete --exclude=.git* --exclude=back/data/ --exclude=.env --exclude=back/.env"
+
+      - name: Reconstruir y reiniciar contenedor
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/${{ secrets.SERVER_USER }}/Homelab/mimi-web/back
+            docker compose up -d --build
+name: Deploy Web to Homelab
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
       - name: Conectar a Tailscale
         uses: tailscale/github-action@v3
         with:
