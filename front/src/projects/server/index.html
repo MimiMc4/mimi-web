@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>meguca_mimi°•</title>
+    <link rel="stylesheet" href="/generalStyles.css">
+    <link rel="stylesheet" href="/textStyles.css">
+    <link rel="icon" href="/logos/logo-no-vect.png">
+    <script type="text/javascript" src="/js/functions.js"></script>
+
+</head>
+<body>
+    
+    <div id="title-box" class="madoka-div">
+        <div id="title-container">
+            <div id="title">
+               projects°•
+            </div>
+            <div id="title-text">
+                <a href="https://myanimelist.net/anime/48542/Do_It_Yourself">Do It Yourself!!</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="back-box" class="madoka-div">
+        <a href="/projects">
+        &lt;• back
+        </a>
+    </div>
+
+    <div id="marquee-container">
+        <marquee>
+            <span >
+                connect to my new service: http://localhost:6767
+            </span>
+        </marquee>
+    </div>
+
+    <div id="border">
+        <div id="main" class="madoka-div"> 
+            <h2 style="text-align: left;">
+                Self hosting: turning my old laptop into a server
+            </h2>
+            <div id="main-text">
+                <p>
+                    I think it's fairly common to have old tech you don't use anymore, right?
+                    In my case, I have some old laptops that nobody at home uses. They are too 
+                    slow, don't have enough ram, maybe the battery is degraded... But you don't 
+                    throw them away because, who knows, maybe one day they're useful for something.
+                </p>
+                <p>
+                    Well, that day came for me. 
+                </p>
+                <p>
+                    I had been wanting for a while to buy my own domain (<a href="https://en.wikipedia.org/wiki/.moe">.moe</a> of course) and start
+                    hosting different things, but I didn't want to rent a vps (even if they had free
+                    options), because I don't want to rely on freebies.
+                    After thinking for a while, I decided to try using my own hardware.
+                </p>
+                <div style="border-top: 1px solid;">
+                    <h3>Setup:</h3>
+                </div>
+                <p>
+                    I took one of my old laptops, the one which was still kinda functional,
+                    but had a broken hinge. A visual interface is not needed, so I wasn't going to be
+                    opening and closing the lid once everything was set up.
+                </p>
+                <p>
+                    It has the following specs:
+                </p>
+                <ul>
+                    <li>
+                        CPU: i3-4005U (4th gen intel core i3 CPU)
+                    </li>
+                    <li>
+                        RAM: 1x4GB DDR3
+                    </li>
+                    <li>
+                        Disk: 1TB HDD (Originally it had very low storage capacity,
+                        but a relative lent me a drive from their old computer)
+                    </li>
+                </ul>
+                <p>
+                    Very low specs by today's standards, but more than enough for what I need.
+                    
+                </p>
+                <p>
+                    I flashed a Debian ISO, connected it via Ethernet to my home network.
+                    The laptop is physically under my desktop, and I connect to it via ssh.
+                    It is permanently connected to power, and it is configured to work with 
+                    the lid closed. I used some bottle caps to slightly raise it for better 
+                    ventilation.
+                </p>
+                <div style="border-top: 1px solid;">
+                    <h3>Connectivity:</h3>
+                </div>
+                <p>
+                    I want to host multiple services. There are different ways to handle this, 
+                    but what I found easiest is the following structure:
+                </p>
+                <p>
+                    Each server is run on a docker container, and it exposes the service on a 
+                    specific port. Then I use a reverse proxy 
+                    (<a href="https://nginxproxymanager.com/">Nginx Proxy Manager</a>) 
+                    that redirects traffic to the correct service. NPM also handles https certificates.
+                </p>
+                <p>
+                    At that point, I could connect to my services through my local network, 
+                    but I couldn't access from outside. One way of solving that problem would
+                    be to open a port on my router and access my server through it, but opening 
+                    a port to the internet is scary....
+                </p>
+                <p>
+                    Luckily, there are tools to solve this problem :)
+                </p>
+                <p>
+                    I have two types of services: public and private services. Public services
+                    can be accessed by anyone from their computer, but private services are services
+                    which can be accessed outside my home network, but only by authorized machines.
+                </p>
+                <p>
+                    For my public services, I use <a href="https://developers.cloudflare.com/tunnel/">cloudflare tunnels</a>, which safely connects people
+                    to my services without opening ports. All of my tunnels point to my reverse proxy.
+                </p>
+                <p>
+                    For my private services, I use <a href="https://tailscale.com/">Tailscale</a>. 
+                    This is a VPN service that runs over <a href="https://www.wireguard.com/">Wireguard</a>.
+                    It allows to easily set up a vpn and has cool features like DNS between 
+                    your machines. Then, I add DNS records pointing certain subdomains to my server's Tailscale IP.
+                    If a machine isn't on my tailnet, they won't be able to connect to my Tailscale IP.
+                </p>
+                <div style="border-top: 1px solid;">
+                    <h3>Services:</h3>
+                </div>
+                <div>
+                    These are the services I'm hosting right now:
+                </div>
+                <ul>
+                    <li>
+                        <h4>This webpage:</h4>
+                        <p>
+                            I have a simple <a href="https://nginx.org/">nginx</a> http server that serves the html. Also I set up a very 
+                            small golang backend for the side bar messages. I can change them from my
+                            phone with a Telegram bot.
+                        </p>
+                        <p>
+                            I have the source code stored in a 
+                            <a  href="https://github.com/MimiMc4/mimi-web">github repo</a>
+                            and whenever I push to main, the web is deployed on my server.
+                        </p>
+                    </li>
+                    <li>
+                        <h4>Remote storage</h4>
+                        I use <a href="https://github.com/9001/copyparty">copyparty</a>. A lightweight 
+                        file server with convenient features. It allows me to share big files with people easily.
+                    </li>
+                    <li>
+                        <h4>Music server</h4>
+                        <p>
+                            There are three different problems you have to solve when you want 
+                            to have a music server:
+                        </p>
+                        <ul>
+                            <li>
+                                Acquiring the music: 
+                                <p>
+                                    I set up a <a href="https://www.slsknet.org">soulseek</a> server which lets me search and download
+                                    music.
+                                </p>
+                            </li>
+                            <li>
+                                Ordering the music:
+                                <p>
+                                    I use <a href="https://beets.io/">beets</a> to curate the metadata of each file
+                                    and import it to my music library directory with the correct directory structure 
+                                    (/artist/album/songs)
+                                </p>
+                            </li>
+                            <li>
+                                Serving the music:
+                                <p>
+                                    I use <a href="https://www.navidrome.org/">Navidrome</a>, a server with a web client
+                                    to listen to my music library. It supports the usual music client features: queues, 
+                                    playlists, lyrics... You can stream music with any client that supports the Subsonic
+                                    protocol.
+                                </p>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h4>Video streaming</h4>
+                        <p>
+                            For video streaming, my workflow is a lot more simple:
+                        </p>
+                        <ul>
+                            <li>
+                                Acquiring the video:
+                                <p>
+                                    I use <a href="https://transmissionbt.com/">transmission</a>, a simple torrent client
+                                    with a web client.
+                                </p>
+                            </li>
+                            <li>
+                                Storing the video:
+                                <p>
+                                    Some releases can be pretty big, so I mounted a dedicated 2TB HDD specifically for 
+                                    video storage.
+                                </p>
+                            </li>
+                            <li>
+                                Accessing the video:
+                                <p>
+                                    I have an nginx server that gives me urls to the files, and 
+                                    then I use <a href="https://mpv.io/">mpv</a> to stream it.
+                                    (A bit messy, I know, but it works, it's simple, and very light).
+                                </p>
+                            </li>
+                        </ul> 
+                    </li>
+                </ul>
+                <div style="border-top: 1px solid;">
+                    <h3>Afterword:</h3>
+                    <p>
+                        It's been a few months since I began this project, and many things have changed 
+                        along the way. I think that I've reached a nice state, with services that fit my 
+                        needs, and avoiding bloat.
+                    </p>
+                    <p>
+                        There are even more things I use my server for. For example, you can set up 
+                        game servers to play with your friends (but I don't have them active permanently).
+                        Also I'm thinking of activating wake-on-LAN on my main PC, and using my server
+                        to boot and connect to it remotely. Tere are so many things you can do, it's like 
+                        playing sys-admin.
+                    </p>
+                    <p>
+                        One concern one might have with this kind of setup is power consumption. I've tried 
+                        to monitor it, but without smart sockets you can't really know how much power it is 
+                        consuming. The closest thing I have are some periodic tasks that read different counters on the server 
+                        so I can monitor different stats like CPU load, memory use, disk I/O...
+                    </p>
+                    <img id="img" style="width: 80%;" src="server-stats.png">
+                    <p>
+                        I really recommend to try and do something like this if you have the opportunity. You
+                        learn a lot of things in the process, and you don't even have to pay for a domain if 
+                        you don't want to; you can do everything through Tailscale if you are the only one 
+                        connecting to your server.
+                    </p>
+                </div>
+
+
+
+                <p style="text-align: center; text-indent: 0px;">Thanks for reading :)</p>
+            </div>
+        </div>
+    </div>
+    <div id="top-box" class="homura-div">
+         <a onclick="topFunction()" id="myBtn" title="Go to top">^ Top ^</a>
+    </div>
+</body>
+</html>
